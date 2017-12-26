@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+  "name": "NetSuite Toolbox",
+  "version": "1.0",
+  "applications": {
+    "gecko": {
+      "id": "netsuitetoolbox@mozilla.org"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.netsuite.com/*"
+      ],
+      "js": [
+        "content-scripts/index.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "content-scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "https://*.netsuite.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "netsuite.png",
+    "default_title": "NetSuite Toolbox",
+    "default_popup": "popup/netsuite-toolbox.html"
+  },
+  "web_accessible_resources": [
+    "content-scripts/page-javascript-context.js"
+  ]
+}
