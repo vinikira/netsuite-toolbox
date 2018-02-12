@@ -28,7 +28,7 @@
     "https://*.netsuite.com/*"
   ],
   "browser_action": {
-    "default_icon": "netsuite.png",
+    "default_icon": "logo.svg",
     "default_title": "NetSuite Toolbox",
     "default_popup": "popup/netsuite-toolbox.html"
   },
