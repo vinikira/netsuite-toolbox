@@ -17,6 +17,20 @@ browser.contextMenus.create({
 })
 
 browser.contextMenus.create({
+    id: 'nstbEnableField',
+    parentId: 'nstb-main-menu',
+    title: 'Enable Field',
+    contexts: ['link']
+})
+
+browser.contextMenus.create({
+    id: 'nstbDisableField',
+    parentId: 'nstb-main-menu',
+    title: 'Disable Field',
+    contexts: ['link']
+})
+
+browser.contextMenus.create({
     id: 'nstbSearchId',
     parentId: 'nstb-main-menu',
     title: 'Search by field ID'
@@ -37,7 +51,19 @@ browser.contextMenus.create({
 browser.contextMenus.create({
     id: 'nstbExportSearch',
     parentId: 'nstb-main-menu',
-    title: 'Export Search to SS2'
+    title: 'Export Search to JSON'
+})
+
+browser.contextMenus.create({
+    id: 'nstbExportRecord',
+    parentId: 'nstb-main-menu',
+    title: 'Export Record to JSON'
+})
+
+browser.contextMenus.create({
+    id: 'nstbLoadSS2Modules',
+    parentId: 'nstb-main-menu',
+    title: 'Load SS2 Modules'
 })
 
 browser.contextMenus.onClicked.addListener(function (info, tab) {

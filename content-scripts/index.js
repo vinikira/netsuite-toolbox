@@ -1,7 +1,6 @@
 if (!document.getElementById('netsuite-tool-box')) injectScript()
 
 function onMessage (request, sender, sendResponse) {
-    // console.log('mensagem recebida pelo content-script...')
     try {
         request.action && window.postMessage(request, '*')
     } catch (e) {

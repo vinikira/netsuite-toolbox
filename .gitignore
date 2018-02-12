@@ -58,4 +58,4 @@ typings/
 .env
 
 # tern
-.ternport
+.tern-port

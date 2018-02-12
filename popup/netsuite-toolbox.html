@@ -3,28 +3,36 @@
     <meta charset="UTF-8"/>
     <title>NetSuite</title>
     <style>
-     ul {
-       list-style-type: none;
+     body {
+       font-family: monospace;
+       background-color: #3e3e3e;
+       color: #fff;
+       padding: 10px;
      }
-     li {
-       cursor: pointer;
-     }
-     li:hover {
-       color: blue;
-       text-decoration: underline;
+     a:visited, a {
+       color: #fff
      }
     </style>
   </head>
   <body>
     <h2>NetSuite Toolbox</h2>
-    <p>github: --</p>
-    <!-- <ul>
-         <li>Record Load</li>
-         <li>Find field by ID</li>
-         <li>Find field by label</li>
-         <li>Export search to JSON</li>
-         <button id="exF">Execute Function</button>
-         </ul> -->
+    <p><strong>Features:</strong>
+      <ul>
+        <li>Current Record Load</li>
+        <li>Copy Field ID (Shift + RightClick)</li>
+        <li>Find field by ID (Ctrl + Shift + f)</li>
+        <li>Find field by label (Ctrl + Shift + l)</li>
+        <li>Export search to JSON</li>
+        <li>Export record to JSON</li>
+        <li>Enable/Disable Field</li>
+        <li>Load SS2 modules</li>
+      </ul>
+    </p>
+    <div>
+      <a href="https://github.com/vinikira/netsuite-toolbox" target="blank">
+        Source code and Features description ->
+      </a>
+    </div>
     <script src="./netsuite-toolbox.js" type="text/javascript"></script>
   </body>
 </html>
