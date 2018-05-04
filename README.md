@@ -1,5 +1,8 @@
 # netsuite-toolbox
-A toolbox for NetSuite.
+A Firefox extentions that is a toolbox for NetSuite. 
+
+## Installation
+Just [click here](https://addons.mozilla.org/firefox/addon/netsuite-toolbox/) and then click on "Add to Firefox" button.
 
 ## Features
 
