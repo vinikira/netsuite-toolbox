@@ -10,7 +10,7 @@ Just [click here](https://addons.mozilla.org/firefox/addon/netsuite-toolbox/) an
 Record is loaded with N/currentRecord and storaged in window.recordLoaded.
 
 ### Copy Field ID
-Copies field ID when ```Shift + RightClick``` is used on field.
+Copies field ID when ```Shift + LeftClick``` is used on field.
 
 ### Find field by ID
 Find field on record page by id. For activate use ```Ctrl + Shift + f```.
