@@ -261,6 +261,7 @@
             nstbLoadRecord,
             nstbCopyFieldId,
             nstbSearchId,
+            nstbSearchLabel,
             evalFunction,
             nstbExportSearch,
             nstbDisableField: changeFieldVisibilty.bind(null, true),

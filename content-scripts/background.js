@@ -33,7 +33,7 @@ browser.contextMenus.create({
 browser.contextMenus.create({
     id: 'nstbSearchId',
     parentId: 'nstb-main-menu',
-    title: 'Search by field ID'
+    title: 'Search by Field ID'
 })
 
 browser.contextMenus.create({
