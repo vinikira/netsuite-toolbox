@@ -59,6 +59,17 @@
             }
 
             const currentSearch = nlapiLoadSearch(null, id)
+            currentSearch.filters = currentSearch.filters.map(filter => {
+                return Object.fromEntries(Object.entries(filter).filter(([key, value]) =>
+                    !(value === null || (["isor", "isnot", "leftparens", "rightparens"].includes(key) && !value))
+                ))
+            })
+            
+            currentSearch.columns = currentSearch.columns.map(column => {
+                return Object.fromEntries(Object.entries(column).filter(([key, value]) =>
+                    !(value === null || (["index", "userindex"].includes(key) && value < 0))
+                ))
+            })
 
             window.open('data:application/json;charset=utf-8,' +
                 encodeURIComponent(JSON.stringify(currentSearch)))
@@ -118,15 +129,15 @@
         })
     }
 
-    function nstbLoadSS2Modules (modules) {
+    function nstbLoadSS2Modules() {
         return prompt('What modules? (separated by commas)')
             .split(',')
             .map((module) => {
                 const mod = module.trim()
                 require([mod], (modLoaded) => {
-                    const modNFree = mod.replace('N/', '')
-                    window[modNFree] = modLoaded
-                    console.log(`Module ${mod} has been loaded and stored in window.${modNFree}.`)
+                    const key = mod.split("/").slice(-1)[0]
+                    window[key] = modLoaded
+                    console.log(`Module ${mod} has been loaded and stored in window.${key}.`)
                 })
             })
     }
