@@ -48,38 +48,46 @@
     }
 
     function nstbExportSearch () {
-        require(['N/search', 'N/currentRecord', 'N/ui/dialog'], (search, cr, dialog) => {
+        try {
+            if(!window.location.href.includes("searchresults.nl") && !window.location.href.includes("search.nl")) {
+                throw new Error("ID not found. Are you on a search page?")
+            }
+            const params = new URLSearchParams(window.location.search)
+            const id = params.get("id") || params.get("searchid")
+            if(!id) {
+                throw new Error("Search is not saved. Please save search to export.")
+            }
+
+            const currentSearch = nlapiLoadSearch(null, id)
+            currentSearch.filters = currentSearch.filters.map(filter => {
+                return Object.fromEntries(Object.entries(filter).filter(([key, value]) =>
+                    !(value === null || (["isor", "isnot", "leftparens", "rightparens"].includes(key) && !value))
+                ))
+            })
+            
+            currentSearch.columns = currentSearch.columns.map(column => {
+                return Object.fromEntries(Object.entries(column).filter(([key, value]) =>
+                    !(value === null || (["index", "userindex"].includes(key) && value < 0))
+                ))
+            })
+
+            window.open('data:application/json;charset=utf-8,' +
+                encodeURIComponent(JSON.stringify(currentSearch)))
+        } catch (e) {
+            alert(e.message)
+        }
+    }
+    
+    function nstbExportRecordXML () {
+        require(['N/currentRecord', 'N/https', 'N/ui/dialog'], (cr, https, dialog) => {
             try {
-                const currentRecord  = cr.get()
+                const cRec = cr.get();
 
-                if (!currentRecord.id) dialog.alert({
-                    title: 'NetSuite Toolbox',
-                    message:'Search is not saved. Please save search to export.'
-                })
+                if (!cRec.type || !cRec.id) {
+                    throw new Error('ID or Type not found. Are you on record page?')
+                }
 
-                const currentSearch = search.load({
-                    type: currentRecord.getValue('searchtype'),
-                    id: currentRecord.id
-                })
-
-                dialog.alert({
-                    title: 'Search exported',
-                    message: '<textarea style="font-family: monospace; font-size=12px;" \
-                          autofocus \
-                          readonly \
-                          rows="18" \
-                          cols="40" \
-                          autocomplete="off" \
-                          autocorrect="off" \
-                          autocapitalize="off" \
-                          spellcheck="false">' +
-                        JSON.stringify(currentSearch, null, 2) +
-                        '</textarea>\
-                        <br/><br/>\
-                        <a href="data:application/json;charset=utf-8,' +
-                        encodeURIComponent(JSON.stringify(currentSearch)) +
-                        '" target="_blank"> Open in new tab </a>'
-                })
+                window.open(window.location + '&xml=t')
             } catch (e) {
                 dialog.alert({
                     title: 'Error',
@@ -89,7 +97,7 @@
         })
     }
 
-    function nstbExportRecord () {
+    function nstbExportRecordJSON () {
         require(['N/currentRecord', 'N/https', 'N/ui/dialog'], (cr, https, dialog) => {
             try {
                 const cRec = cr.get();
@@ -121,15 +129,15 @@
         })
     }
 
-    function nstbLoadSS2Modules (modules) {
+    function nstbLoadSS2Modules() {
         return prompt('What modules? (separated by commas)')
             .split(',')
             .map((module) => {
                 const mod = module.trim()
                 require([mod], (modLoaded) => {
-                    const modNFree = mod.replace('N/', '')
-                    window[modNFree] = modLoaded
-                    console.log(`Module ${mod} has been loaded and stored in window.${modNFree}.`)
+                    const key = mod.split("/").slice(-1)[0]
+                    window[key] = modLoaded
+                    console.log(`Module ${mod} has been loaded and stored in window.${key}.`)
                 })
             })
     }
@@ -264,15 +272,17 @@
             nstbLoadRecord,
             nstbCopyFieldId,
             nstbSearchId,
+            nstbSearchLabel,
             evalFunction,
             nstbExportSearch,
             nstbDisableField: changeFieldVisibilty.bind(null, true),
             nstbEnableField: changeFieldVisibilty.bind(null, false),
-            nstbExportRecord,
+            nstbExportRecordXML,
+            nstbExportRecordJSON,
             nstbLoadSS2Modules
         }
 
-        if (type && !window.require) return alert('Require is not defined. Current page is not compatible.')
+        if (type && !window.require && type !== "nstbExportSearch") return alert('Require is not defined. Current page is not compatible.')
 
         return actions.hasOwnProperty(type) && actions[type](event)
     }

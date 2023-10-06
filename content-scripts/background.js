@@ -33,7 +33,7 @@ browser.contextMenus.create({
 browser.contextMenus.create({
     id: 'nstbSearchId',
     parentId: 'nstb-main-menu',
-    title: 'Search by field ID'
+    title: 'Search by Field ID'
 })
 
 browser.contextMenus.create({
@@ -55,7 +55,13 @@ browser.contextMenus.create({
 })
 
 browser.contextMenus.create({
-    id: 'nstbExportRecord',
+    id: 'nstbExportRecordXML',
+    parentId: 'nstb-main-menu',
+    title: 'Export Record to XML'
+})
+
+browser.contextMenus.create({
+    id: 'nstbExportRecordJSON',
     parentId: 'nstb-main-menu',
     title: 'Export Record to JSON'
 })

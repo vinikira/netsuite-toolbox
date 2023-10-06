@@ -1,4 +1,4 @@
-if (!document.getElementById('netsuite-tool-box')) injectScript()
+if (!document.getElementById('netsuite-tool-box') && !document.getElementsByTagName("nsResponse").length) injectScript()
 
 function onMessage (request, sender, sendResponse) {
     try {
