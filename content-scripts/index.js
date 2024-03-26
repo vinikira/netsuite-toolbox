@@ -1,4 +1,4 @@
-if (!document.getElementById('netsuite-tool-box')) injectScript()
+if (!document.getElementById('netsuite-tool-suite')) injectScript()
 
 function onMessage (request, sender, sendResponse) {
     try {
@@ -13,7 +13,7 @@ function injectScript () {
     const scriptURL = browser.extension.getURL(
         '../content-scripts/page-javascript-context.js'
     )
-    script.id = 'netsuite-tool-box'
+    script.id = 'netsuite-tool-suite'
     script.src = scriptURL
     ;(document.head || document.documentElement).appendChild(script)
 }
