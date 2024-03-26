@@ -1,12 +1,12 @@
 ;(function () {
-    function nstbLoadRecord (event) {
+    function nstsLoadRecord (event) {
         require(['N/currentRecord'], (currentRecord) => {
             window.recordLoaded = currentRecord.get()
-            console.log('Current record is stored in "recordLoaded" variable!')
+            console.log('Current record is stored in "recordLoaded" variable')
         })
     }
 
-    function nstbCopyFieldId (event) {
+    function nstsCopyFieldId (event) {
         const { info } = event.data
 
         return prompt(`ID ${info.linkText}`, getFieldIdByLink(event))
@@ -28,14 +28,14 @@
         }, 3000)
     }
 
-    function nstbSearchId () {
+    function nstsSearchId () {
         const idToSearch = prompt('Input field ID to search')
         const field = document.getElementById(`${idToSearch}_fs_lbl`)
 
         field && highlightField(field)
     }
 
-    function nstbSearchLabel () {
+    function nstsSearchLabel () {
         const labelToSearch = prompt('Input field label to search').toUpperCase()
         const field = Array
               .from(document.querySelectorAll('span.smallgraytextnolink>a.smallgraytextnolink'))
@@ -47,13 +47,13 @@
         highlightField(field.parentNode)
     }
 
-    function nstbExportSearch () {
+    function nstsExportSearch () {
         require(['N/search', 'N/currentRecord', 'N/ui/dialog'], (search, cr, dialog) => {
             try {
                 const currentRecord  = cr.get()
 
                 if (!currentRecord.id) dialog.alert({
-                    title: 'NetSuite Toolbox',
+                    title: 'NetSuite ToolSuite',
                     message:'Search is not saved. Please save search to export.'
                 })
 
@@ -89,7 +89,7 @@
         })
     }
 
-    function nstbExportRecord () {
+    function nstsExportRecord () {
         require(['N/currentRecord', 'N/https', 'N/ui/dialog'], (cr, https, dialog) => {
             try {
                 const cRec = cr.get();
@@ -121,7 +121,7 @@
         })
     }
 
-    function nstbLoadSS2Modules (modules) {
+    function nstsLoadSS2Modules (modules) {
         return prompt('What modules? (separated by commas)')
             .split(',')
             .map((module) => {
@@ -261,18 +261,18 @@
     function messageRouter (event) {
         const type = event.data.action
         const actions = {
-            nstbLoadRecord,
-            nstbCopyFieldId,
-            nstbSearchId,
+            nstsLoadRecord,
+            nstsCopyFieldId,
+            nstsSearchId,
             evalFunction,
-            nstbExportSearch,
-            nstbDisableField: changeFieldVisibilty.bind(null, true),
-            nstbEnableField: changeFieldVisibilty.bind(null, false),
-            nstbExportRecord,
-            nstbLoadSS2Modules
+            nstsExportSearch,
+            nstsDisableField: changeFieldVisibilty.bind(null, true),
+            nstsEnableField: changeFieldVisibilty.bind(null, false),
+            nstsExportRecord,
+            nstsLoadSS2Modules
         }
 
-        if (type && !window.require) return alert('Require is not defined. Current page is not compatible.')
+        if (type && !window.require) return alert('Current page is not compatible with the NetSuite-ToolSuite extension.')
 
         return actions.hasOwnProperty(type) && actions[type](event)
     }
@@ -293,8 +293,8 @@
     document.addEventListener('keydown', e => {
         const { keyCode, shiftKey, ctrlKey } = e
         const handlers = {
-            '70': nstbSearchId,
-            '76': nstbSearchLabel
+            '70': nstsSearchId,
+            '76': nstsSearchLabel
         }
 
         return ctrlKey && shiftKey && handlers.hasOwnProperty(keyCode) && handlers[keyCode](e)
