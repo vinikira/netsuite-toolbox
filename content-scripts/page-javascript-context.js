@@ -215,7 +215,8 @@
         setTimeout(() => {
             target.parentElement.removeChild(message)
         }, 1000)
-        document.querySelectorAll('[data-window-button="close"]').item(0).click()
+
+        document.querySelectorAll('[data-window-button="close"]').item(0).click()        
     }
 
     function extractIdFromField (target) {
