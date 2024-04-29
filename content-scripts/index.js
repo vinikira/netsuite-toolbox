@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-if (!document.getElementById('netsuite-tool-box')) injectScript()
-=======
 if (((document.URL).indexOf('&xml=') === -1) && (!document.getElementById('netsuite-tool-box'))) injectScript()
->>>>>>> dc35c82 (Fixes for native NetSuite XML view, Shift-click on Field ID)
 
 function onMessage (request, sender, sendResponse) {
     try {

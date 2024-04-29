@@ -215,12 +215,7 @@
         setTimeout(() => {
             target.parentElement.removeChild(message)
         }, 1000)
-<<<<<<< HEAD
-
-        document.querySelector('.x-tool-close').click()
-=======
         document.querySelectorAll('[data-window-button="close"]').item(0).click()
->>>>>>> dc35c82 (Fixes for native NetSuite XML view, Shift-click on Field ID)
     }
 
     function extractIdFromField (target) {
