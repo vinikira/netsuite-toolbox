@@ -216,7 +216,7 @@
             target.parentElement.removeChild(message)
         }, 1000)
 
-        document.querySelector('.x-tool-close').click()
+        document.querySelectorAll('[data-window-button="close"]').item(0).click()        
     }
 
     function extractIdFromField (target) {

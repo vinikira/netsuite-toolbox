@@ -1,4 +1,4 @@
-if (!document.getElementById('netsuite-tool-box')) injectScript()
+if (((document.URL).indexOf('&xml=') === -1) && (!document.getElementById('netsuite-tool-box'))) injectScript()
 
 function onMessage (request, sender, sendResponse) {
     try {
