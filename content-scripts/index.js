@@ -3,7 +3,8 @@ const isXml = document.URL.includes('&xml=')
 // add explicit check for login page to avoid injecting script
 // and causing errors on login page (and clashes with Bitwarden password manager)
 
-const isLoginPage = window.location.pathname.startsWith('/app/login')
+const isLoginPage = window.location.pathname.startsWith('/app/login') ||
+  window.location.pathname.startsWith('/pages/customerlogin')
 
 // don't inject on the login page
 if (!isXml && !isLoginPage && !document.getElementById('netsuite-tool-box')) {
