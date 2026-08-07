@@ -20,8 +20,8 @@ function onMessage (request, sender, sendResponse) {
 
 function injectScript () {
     const script = document.createElement('script')
-    const scriptURL = browser.extension.getURL(
-        '../content-scripts/page-javascript-context.js'
+    const scriptURL = browser.runtime.getURL(
+        'content-scripts/page-javascript-context.js'
     )
     script.id = 'netsuite-tool-box'
     script.src = scriptURL
